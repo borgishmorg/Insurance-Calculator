@@ -1,0 +1,59 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  variables:
+    TEST_PATH: "/home/test"
+  script:
+  - echo "Running tests..."
+  - pwd
+  - if [ ! -d $TEST_PATH ]; then mkdir $TEST_PATH; fi
+  - rsync -arvz --include-from './rsync-include.txt' --exclude-from './rsync-exclude.txt' --delete ./ $TEST_PATH
+  - cd $TEST_PATH
+  - docker build -t test_calc_img_test .
+  - docker container rm test_calc_test --force || true
+  - docker run -p 8081:8080 --detach --name test_calc_test test_calc_img_test
+  - python3 -m venv venv
+  - source ./venv/bin/activate
+  - pip install -r ./requirements.txt
+  - cd tests
+  - pytest . --port 8081
+  - docker container rm test_calc_test --force || true
+
+build:
+  stage: build
+  script: echo "Building the app..."
+
+# ------------------------------------------------------------------------------
+#                               DEPLOY TO PRODUCTION
+# ------------------------------------------------------------------------------
+# @see http://articles.slicehost.com/2007/10/10/rsync-exclude-files-and-folders
+deploy to production:
+  stage: deploy
+  variables:
+    DEPLOY_PATH: "/home/deploy"
+  script:
+    - echo "Deploy to production server..."
+    - pwd
+    - if [ ! -d $DEPLOY_PATH ]; then mkdir $DEPLOY_PATH; fi
+    - rsync -arvz --include-from './rsync-include.txt' --exclude-from './rsync-exclude.txt' --delete ./ $DEPLOY_PATH
+    - cd $DEPLOY_PATH
+    #- cp app/envs/environment-prod.py app/environment.py
+    #- docker-compose up --build -d
+    #- curl -v http://127.0.0.1:5001/api_v1/cashback_calc
+    #- docker stack deploy -c ./docker-compose.yml cashback
+    #- docker build --no-cache -t python-bi-api .
+    #- docker container rm python-bi-api --force || true
+    #- docker run -d --name python-bi-api -p 40000:4000 python-bi-api
+    - docker build -t test_calc_img .
+    - docker container rm test_calc --force || true
+    - docker run --network="host" -p 8080:8080 --detach --name test_calc test_calc_img
+    #- python3 -m venv venv
+    #- source ./venv/bin/activate
+    #- pip install -r ./requirements.txt
+    #- python ./app/main.py
+  environment:
+    name: production

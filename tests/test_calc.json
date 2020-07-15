@@ -1,0 +1,885 @@
+{
+  "tests": [
+    {
+      "label": "response test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "key": "error",
+          "value": "currency is not specified"
+        }
+      ]
+    },
+    {
+      "label": "empty json test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {},
+          "key": "error",
+          "value": "currency is not specified"
+        }
+      ]
+    },
+    {
+      "label": "departure terminal is not specified test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "price": 0,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "departure_terminal is not specified"
+        }
+      ]
+    },
+    {
+      "label": "arrival terminal is not specified test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "vladivostok",
+            "season": "winter",
+            "price": 0,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "arrival_terminal is not specified"
+        }
+      ]
+    },
+    {
+      "label": "season is not specified test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "price": 0,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "season is not specified"
+        }
+      ]
+    },
+    {
+      "label": "price is not specified test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "minsk",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "price is not specified"
+        }
+      ]
+    },
+    {
+      "label": "currency is not specified test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "minsk",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "price": 0,
+            "second_hand": true
+          },
+          "key": "error",
+          "value": "currency is not specified"
+        }
+      ]
+    },
+    {
+      "label": "unavailable terminal test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "not-available-terminal",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "price": 0,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "not-available-terminal is not available"
+        }
+      ]
+    },
+    {
+      "label": "currency is not exist test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "moscow",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "currency": "tugriki",
+            "price": 0,
+            "second_hand": false
+          },
+          "key": "error",
+          "value": "Please specify a valid currency"
+        }
+      ]
+    },
+    {
+      "label": "wrong departure terminal type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": [],
+            "arrival_terminal": "moscow",
+            "season": "summer",
+            "price": 10,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "[] is not available"
+        }
+      ]
+    },
+    {
+      "label": "wrong arrival terminal type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "moscow",
+            "arrival_terminal": 12,
+            "season": "summer",
+            "price": 10,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "12 is not available"
+        }
+      ]
+    },
+    {
+      "label": "wrong season type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "moscow",
+            "arrival_terminal": "moscow",
+            "season": {
+              "test": 12,
+              "not_test": 42
+            },
+            "price": 10,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "{'test': 12, 'not_test': 42} is not available"
+        }
+      ]
+    },
+    {
+      "label": "wrong price type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "moscow",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "price": "300$",
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "Please specify a valid params types"
+        }
+      ]
+    },
+    {
+      "label": "zero price test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "price": 0,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "cost",
+          "value": 78160
+        }
+      ]
+    },
+    {
+      "label": "dollar currency test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "currency": "USD",
+            "price": 0,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1120
+        }
+      ]
+    },
+    {
+      "label": "second dollar currency test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "currency": "USD",
+            "price": 4660,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1120
+        }
+      ]
+    },
+    {
+      "label": "third dollar currency test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "currency": "USD",
+            "price": 4670,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1121
+        }
+      ]
+    },
+    {
+      "label": "kaliningrad vladivostok summer 49",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "summer",
+            "currency": "EUR",
+            "price": 4900,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "label": "kaliningrad vladivostok summer 50",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "summer",
+            "currency": "EUR",
+            "price": 4900,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "label": "kaliningrad vladivostok summer 51",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "summer",
+            "currency": "EUR",
+            "price": 5100,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 1020
+        }
+      ]
+    },
+    {
+      "label": "kaliningrad vladivostok winter 2000 test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "kaliningrad",
+            "arrival_terminal": "vladivostok",
+            "season": "winter",
+            "currency": "USD",
+            "price": 200000,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 48000
+        }
+      ]
+    },
+    {
+      "label": "moscow kaliningrad spring 99000.99 test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "moscow",
+            "arrival_terminal": "kaliningrad",
+            "season": "spring",
+            "price": 9900099,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "cost",
+          "value": 1633516
+        }
+      ]
+    },
+    {
+      "label": "grodno kaliningrad fall 758000256.52 test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "grodno",
+            "arrival_terminal": "kaliningrad",
+            "season": "fall",
+            "price": 75800025652,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "cost",
+          "value": 3790001283
+        }
+      ]
+    },
+    {
+      "label": "penza kaliningrad spring 123 test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "tariff": "base",
+            "departure_terminal": "penza",
+            "arrival_terminal": "kaliningrad",
+            "season": "spring",
+            "currency": "EUR",
+            "price": 12300,
+            "second_hand": false
+          },
+          "key": "cost",
+          "value": 5547
+        }
+      ]
+    },
+    {
+      "label": "saratov minsk winter 31415.92",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "saratov",
+            "arrival_terminal": "minsk",
+            "season": "winter",
+            "price": 3141592,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "cost",
+          "value": 1489115
+        }
+      ]
+    },
+    {
+      "label": "vyazma kaliningrad summer 1000000000000 test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "vyazma",
+            "arrival_terminal": "kaliningrad",
+            "season": "summer",
+            "price": 100000000000000,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "cost",
+          "value": 5000000000000
+        }
+      ]
+    },
+    {
+      "label": "second hand test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "departure_terminal": "vyazma",
+            "arrival_terminal": "kaliningrad",
+            "season": "summer",
+            "price": 10000,
+            "second_hand": true,
+            "currency": "EUR"
+          },
+          "key": "cost",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "label": "wrong tariff test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "calc",
+          "method": "GET",
+          "auth": {
+            "type": "Bearer"
+          },
+          "params": {
+            "tariff": "Супер МТС",
+            "departure_terminal": "vyazma",
+            "arrival_terminal": "kaliningrad",
+            "season": "summer",
+            "price": 100000000000000,
+            "second_hand": false,
+            "currency": "RUB"
+          },
+          "key": "error",
+          "value": "Please specify a valid tariff"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "minimum_EUR": 1000,
+  "second_hand_charge": 0.5,
+  "big_charge": 0.05,
+  "terminals": {
+    "moscow": 0.1,
+    "kaliningrad": 0.15,
+    "vladivostok": 0.2,
+    "grodno": 0.16,
+    "vyazma": 0.35,
+    "minsk": 0.05,
+    "saratov": 0.395,
+    "penza": 0.41
+  },
+  "seasons": {
+    "winter": 1.2,
+    "spring": 1.1,
+    "summer": 1.0,
+    "fall": 1.1
+  },
+  "formula": {
+    "second hand": {
+      "condition": "$second_hand",
+      "cost": "multiply($price, $second_hand_charge)"
+    },
+    "10 million and more": {
+      "condition": "bigger($price, 10000000)",
+      "cost": "multiply($price, $big_charge)"
+    },
+    "default": {
+      "cost": "multiply($price, seasons->$season, max(terminals->$departure_terminal, terminals->$arrival_terminal))"
+    }
+  }
+}

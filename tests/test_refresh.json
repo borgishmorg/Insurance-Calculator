@@ -1,0 +1,53 @@
+{
+  "tests": [
+    {
+      "label": "test refresh token",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "refresh-token"
+        },
+        {
+          "cmd": "refresh",
+          "method": "POST",
+          "auth": {
+            "type": "Bearer",
+            "token_type": "refresh-token"
+          },
+          "key": "access-token"
+        }
+      ]
+    },
+    {
+      "label": "test wrong refresh token",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "refresh-token"
+        },
+        {
+          "cmd": "refresh",
+          "method": "POST",
+          "auth": {
+            "type": "Bearer",
+            "token_type": "access-token"
+          },
+          "key": "error",
+          "value": "Please specify a valid refresh token"
+        }
+      ]
+    }
+  ]
+}

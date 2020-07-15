@@ -1,0 +1,176 @@
+{
+  "tests":[
+    {
+      "label": "wrong login test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "wrong login",
+            "password": "wrong password"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "a lot of colons test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": ":::::::::::::::::",
+            "password": ":::::::::::::::::"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "login without auth header test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "wrong auth type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "WrongType",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "auth without password test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "auth without login test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "password": "password123"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "login without login and password test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic"
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "wrong login type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": [
+              {
+                "test": {
+                  "test": 0
+                }
+              }
+            ],
+            "password": 123
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "wrong password type test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": [
+              {
+                "test": {
+                  "test": 0
+                }
+              }
+            ]
+          },
+          "key": "error",
+          "value": "Please specify a valid login/password"
+        }
+      ]
+    },
+    {
+      "label": "right login and password test",
+      "cmd_list": [
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "access-token"
+        },
+        {
+          "cmd": "login",
+          "method": "POST",
+          "auth": {
+            "type": "Basic",
+            "login": "test",
+            "password": "password123"
+          },
+          "key": "refresh-token"
+        }
+      ]
+    }
+  ]
+}

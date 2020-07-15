@@ -1,0 +1,5 @@
+japronto
+pytest
+requests
+pyjwt
+pika
